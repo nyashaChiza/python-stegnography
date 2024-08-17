@@ -14,16 +14,16 @@ This project is a Django web application that allows users to securely hide text
 
 ## Requirements
 
-- Python 3.8+
-- Django 3.2+
+- Python 3.12+
+- Django 5.0+
 - Pillow (Python Imaging Library)
 
 ## Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/django-steganography.git
-   cd django-steganography
+   git clone https://github.com/nyashachiza/python-steganography.git
+   cd python-steganography
    ```
 
 2. **Create and activate a virtual environment:**
@@ -69,12 +69,12 @@ This project is a Django web application that allows users to securely hide text
 
 ## Project Structure
 
-- `stego_app/` - Main Django project directory.
+- `core/` - Main Django project directory.
 - `steganography/` - Django app handling the steganography functionality.
   - `models.py` - Optional database models (if needed).
   - `views.py` - Handles the encoding and decoding logic.
   - `forms.py` - Forms for file uploads.
-  - `stego_utils.py` - Contains the steganography functions for encoding and decoding.
+  - `helpers.py` - Contains the steganography functions for encoding and decoding.
   - `templates/steganography/` - HTML templates for encoding and decoding pages.
 - `static/` - Static files (CSS, JavaScript).
 - `media/` - Directory for uploaded files and images (if configured).
@@ -89,7 +89,6 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 ## Contact
 
-For any inquiries or support, please contact [yourname@example.com](mailto:yourname@example.com).
+For any inquiries or support, please contact [nchizampeni@gmail.com](mailto:nchizampeni@gmail.com).
 ```
 
-Replace placeholders like `yourusername` and `yourname@example.com` with your actual GitHub username and contact email. This `README.md` provides an overview, installation steps, usage instructions, and project structure details for your Django Steganography app.
