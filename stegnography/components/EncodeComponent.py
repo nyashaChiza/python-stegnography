@@ -1,25 +1,34 @@
+# views.py
 from django_unicorn.components import UnicornView
 from stegano import lsb
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.base import ContentFile
+from stegnography.forms import EncodeForm
 import io
+from django.conf import settings
+
 
 class EncodecomponentView(UnicornView):
-    message = ""
-    cover_image = None
+    form_class = EncodeForm
     stego_image_url = None
 
     def encode(self):
-        if self.message and self.cover_image:
-            # Hide the message in the image using Stegano
-            stego_image = lsb.hide(self.cover_image.temporary_file_path(), self.message)
+        form = self.form_class(self.request.POST, self.request.FILES)
+        
+        if form.is_valid():
+            message = form.cleaned_data['message']
+            cover_image = form.cleaned_data['cover_image']
             
-            # Save the stego image to an in-memory file
+            # Process the image
+            image_file = cover_image.read()
+            stego_image = lsb.hide(io.BytesIO(image_file), message)
+            
+            # Save to in-memory file
             output = io.BytesIO()
             stego_image.save(output, format="PNG")
             output.seek(0)
-
-            # Convert to an InMemoryUploadedFile for easy download
-            self.stego_image_url = InMemoryUploadedFile(output, None, 'stego_image.png', 'image/png', output.tell(), None)
-            input('wait here')
+            file_name = 'stego_image.png'
+            self.stego_image_url = ContentFile(output.read(), file_name)
+            
+            settings.LOGGER.debug(f'Stego image created: {file_name}')
         else:
-            input(self.message)
+            settings.LOGGER.error('Form validation failed')
