@@ -9,12 +9,12 @@ from django.urls import reverse
 from PIL import Image
 from stegano import lsb
 
-
-
 class EncodeViewTests(TestCase):
 
     def setUp(self):
         self.client = Client()
+        # Ensure MEDIA_ROOT directory exists
+        os.makedirs(settings.MEDIA_ROOT, exist_ok=True)
         self.encode_url = reverse('encode')  # Update this if your URL pattern is different
 
     def test_encode_view_post(self):
@@ -89,13 +89,15 @@ class DownloadFileTests(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.download_url = reverse('download', kwargs={'file_name': 'test_file.png'})  # Update this if your URL pattern is different
-
-        # Create a dummy file for testing
         self.file_name = 'test_file.png'
         self.file_path = os.path.join(settings.MEDIA_ROOT, self.file_name)
+        # Ensure MEDIA_ROOT directory exists
+        os.makedirs(settings.MEDIA_ROOT, exist_ok=True)
+        # Create a dummy file for testing
         with open(self.file_path, 'wb') as f:
             f.write(b'This is a test file')
+
+        self.download_url = reverse('download', kwargs={'file_name': self.file_name})  # Update this if your URL pattern is different
 
     def test_download_file_success(self):
         response = self.client.get(self.download_url)
