@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Encode Results</h1>
+    {% if stego_image_file_name %}
+        <div class="alert alert-success mt-4">
+            <p>Stego image created successfully!</p>
+            <!-- Use file_name as a separate context variable -->
+            <a href="{% url 'download' file_name=stego_image_file_name %}" class="btn btn-success" download>Download the image</a>
+        </div>
+    {% else %}
+        <div class="alert alert-danger mt-4">
+            <p>Failed to create stego image. Please try again.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

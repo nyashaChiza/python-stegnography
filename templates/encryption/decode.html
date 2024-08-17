@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Decode Message from Image</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Decode</button>
+    </form>
+    {% if decoded_message %}
+        <div class="alert alert-info mt-4">
+            <p>Decoded message:</p>
+            <p>{{ decoded_message }}</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
