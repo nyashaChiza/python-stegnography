@@ -34,6 +34,7 @@ def encode_view(request):
             
             # Save file to media folder
             file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
             with open(file_path, 'wb') as f:
                 f.write(stego_image_file.read())
 
