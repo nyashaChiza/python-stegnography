@@ -2,7 +2,7 @@
 
 {% block content %}
 <div unicorn:view="EncodeComponentView">
-    <form wire:submit.prevent="encode" enctype="multipart/form-data">
+    {% csrf_token %}
         <div class="form-group">
             <label for="message">Message to hide:</label>
             <input unicorn:model="message" class="form-control" type="text" id="message" /><br />
@@ -13,7 +13,7 @@
             <input unicorn:model="file" type="file" id="cover_image" unicorn:model="cover_image" class="form-control"/>
         </div>
 
-        <button type="submit" class="btn btn-primary form-control">Encode</button>
+        <button unicorn:click='encode' class="btn btn-primary form-control">Encode</button>
     </form>
 
     {% if stego_image_url %}
