@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div unicorn:view="DecodeComponentView">
+    <form wire:submit.prevent="decode" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="stego_image">Select a stego image:</label>
+            <input type="file" id="stego_image" class="form-control" wire:model="stego_image">
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Decode</button>
+    </form>
+    
+    {% if decoded_message %}
+        <div class="alert alert-success mt-4">
+            <p>Decoded message: {{ decoded_message }}</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

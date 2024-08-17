@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div unicorn:view="EncodeComponentView">
+    <form wire:submit.prevent="encode" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="message">Message to hide:</label>
+            <textarea id="message" class="form-control" wire:model="message"></textarea>
+        </div>
+    
+        <div class="form-group">
+            <label for="cover_image">Select a cover image:</label>
+            <input type="file" id="cover_image" class="form-control" wire:model="cover_image">
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Encode</button>
+    </form>
+    
+    {% if stego_image_url %}
+        <div class="alert alert-success mt-4">
+            Stego image created! <a href="{{ stego_image_url }}" class="alert-link" download>Download the image</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
