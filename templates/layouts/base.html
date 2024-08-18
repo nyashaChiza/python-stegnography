@@ -18,21 +18,35 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#`">Steganography App</a>
+        <a class="navbar-brand" href="{% url 'text_encode' %}">Steganography App</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'encode' %}">Encode</a>
+        <div class="collapse navbar-collapse dropdown-center mx-3" id="navbarNav">
+            <ul class="navbar-nav ml-auto"> <!-- Align items to the right -->
+                <li class="nav-item dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLinkText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Text
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkText">
+                        <a class="dropdown-item" href="{% url 'text_encode' %}">Encode</a>
+                        <a class="dropdown-item" href="{% url 'text_decode' %}">Decode</a>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'decode' %}">Decode</a>
+                <li class="nav-item dropdown mx-1">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLinkFile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        File
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkFile">
+                        <a class="dropdown-item" href="{% url 'file_encode' %}">Encode</a>
+                        <a class="dropdown-item" href="{% url 'file_decode' %}">Decode</a>
+                    </div>
                 </li>
             </ul>
         </div>
     </nav>
+    
+    
     
     <!-- Main Content -->
     <div class="container mt-5">

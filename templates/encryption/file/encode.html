@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Encode File into Image</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Encode</button>
+    </form>
+    {% if stego_image_url %}
+        <div class="alert alert-success mt-4">
+            <p>Stego image created! <a href="{{ stego_image_url.url }}" download>Download the image</a></p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
