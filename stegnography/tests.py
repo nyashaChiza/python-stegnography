@@ -15,7 +15,7 @@ class EncodeViewTests(TestCase):
         self.client = Client()
         # Ensure MEDIA_ROOT directory exists
         os.makedirs(settings.MEDIA_ROOT, exist_ok=True)
-        self.encode_url = reverse('encode')  # Update this if your URL pattern is different
+        self.encode_url = reverse('text_encode')  # Update this if your URL pattern is different
 
     def test_encode_view_post(self):
         # Create a dummy image for testing
@@ -35,7 +35,7 @@ class EncodeViewTests(TestCase):
         
         # Check if the response is rendered correctly
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'encryption/encrypt_result.html')
+        self.assertTemplateUsed(response, 'encryption/text/encrypt_result.html')
         
         # Check if the file was saved
         file_name = response.context['stego_image_file_name']
@@ -48,13 +48,13 @@ class EncodeViewTests(TestCase):
     def test_encode_view_get(self):
         response = self.client.get(self.encode_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'encryption/encode.html')
+        self.assertTemplateUsed(response, 'encryption/text/encode.html')
 
 class DecodeViewTests(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.decode_url = reverse('decode')  # Update this if your URL pattern is different
+        self.decode_url = reverse('text_decode')  # Update this if your URL pattern is different
 
     def test_decode_view_post(self):
         # Create a dummy image for testing
@@ -77,13 +77,13 @@ class DecodeViewTests(TestCase):
 
         # Check if the message was decoded
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'encryption/decode.html')
+        self.assertTemplateUsed(response, 'encryption/text/decode.html')
         self.assertEqual(response.context['decoded_message'], message)
 
     def test_decode_view_get(self):
         response = self.client.get(self.decode_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'encryption/decode.html')
+        self.assertTemplateUsed(response, 'encryption/text/decode.html')
 
 class DownloadFileTests(TestCase):
 
